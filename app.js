@@ -8,9 +8,15 @@ const port = 8080;
 const url = "http://goo.gl/U6v4fE";
 
 request(url, (err, resp, body) => {
-  let $ = cheerio.load(body);
-  let jobTitle = $(".jobtitle font").text();
-  console.log(jobTitle);
+  const $ = cheerio.load(body);
+  const jobTitle = $(".jobtitle font").text();
+  const jobDescription = $(".summary p b").text();
+  const jobLocation = $(".location").text();
+
+  //Same as jobTitle: jobTitle, an object
+  const obj = { jobTitle, jobDescription, jobLocation }
+
+  console.log(obj);
 })
 
 app.listen(port, () => {
